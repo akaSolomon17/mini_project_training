@@ -1,0 +1,28 @@
+{
+    "songs":[
+        {
+            "id": 1,
+            "name": "song 1",
+            "artist": "artist 1",
+            "path":"abc",
+            "img":"img.png",
+            "favorite_flag": false
+        },
+        {
+            "id": 2,
+            "name": "song 2",
+            "artist": "artist 2",
+            "path":"abc2",
+            "img":"img2.png",
+            "favorite_flag": false
+        },
+        {
+            "id": 3,
+            "name": "song 3",
+            "artist": "artist 3",
+            "path":"abc3",
+            "img":"img4.png",
+            "favorite_flag": false
+        }
+    ]
+}
