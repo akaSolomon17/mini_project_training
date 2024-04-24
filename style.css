@@ -45,7 +45,6 @@ body {
 
 .container {
   border-radius: 15px;
-
   justify-content: center;
   align-items: center;
   height: 800px;
@@ -67,8 +66,20 @@ body {
   height: 100%;
 }
 
-.disc {
-  animation: rolling 2s infinite linear;
+.disc-img {
+  position: relative;
+  object-fit: cover;
+  border-radius: 50% !important;
+  height: 300px;
+  width: 300px;
+  left: 105px;
+  top: 20px;
+  animation: rolling 4s infinite linear;
+  box-shadow: 0 0 0 8px rgba(255,255,255,0.3);
+}
+
+.disc-container .stop {
+  animation: rolling 0s infinite linear;
 }
 
 @keyframes rolling {
@@ -81,6 +92,7 @@ body {
 }
 
 .disc-container {
+  overflow: hidden;
   border-radius: 12px;
   width: 35%;
   height: 500px;
@@ -99,11 +111,8 @@ i, tr {
   cursor: pointer;
 }
 
-i.fa-play {
+i.fa-circle-play, i.fa-circle-pause {
   display: inline-block;
-  border-radius: 60px;
-  box-shadow: 0 0 3px #000;
-  padding: 0.5em 0.6em;
 }
 
 .song{
@@ -111,5 +120,16 @@ i.fa-play {
   border-radius: 15px !important;
   color: white;
   background-color: #0000005d;
+}
 
+.control i:hover {
+  color: #0A5B81;
+}
+
+.active {
+  color: #0A5B81;
+}
+
+.highlight {
+  background-color: lightgrey;
 }
