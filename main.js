@@ -56,9 +56,10 @@ fetch("http://localhost:3000/songs")
   .then(() => {
     const playlistRows = document.querySelectorAll(".song-table tr");
 
-    playlistRows.forEach((row, index) => {
+    playlistRows.forEach((row) => {
       row.addEventListener("click", () => {
-        playSong(index);
+        const id = row.dataset.id;
+        playSong(id - 1);
       });
     });
   })
@@ -76,6 +77,7 @@ const fetchPlaylist = (songsContainer) => {
     const tr = document.createElement("tr");
 
     tr.classList.add(`song${id}`);
+    tr.setAttribute("data-id", id);
     tr.innerHTML = `
         <td class="num fs-5 fw-medium">${id}</td>
         <td class="song-title fs-5 fw-medium">${name}</td>
@@ -83,9 +85,7 @@ const fetchPlaylist = (songsContainer) => {
           <i class="${isFavorites ? "fa-solid" : "fa-regular"} fa-heart ${
       isFavorites ? "active" : ""
     }"></i>
-    
         </td>
-
         <td class="length fs-5"></td>
     `;
     playlistContainer.appendChild(tr);
@@ -131,17 +131,21 @@ const formatTime = (time) => {
 };
 
 const loadSong = (index) => {
-  let songName = songsContainer[index].name;
-  let artistName = songsContainer[index].artist.join(", ");
-  coverImage.src = songsContainer[index].img;
-  discImage.src = songsContainer[index].img;
-  audio.src = songsContainer[index].path;
+  try {
+    let songName = songsContainer[index].name;
+    let artistName = songsContainer[index].artist.join(", ");
+    coverImage.src = songsContainer[index].img;
+    discImage.src = songsContainer[index].img;
+    audio.src = songsContainer[index].path;
 
-  infoWrapper.innerHTML = `
+    infoWrapper.innerHTML = `
   <div class="current-song fs-1 mb-2  fw-bolder">${songName}</div>
   <div class="song-details d-flex align-items-center mb-4">
     <div class=" fs-5 fw-medium">${artistName}</div>
   </div>`;
+  } catch (error) {
+    return;
+  }
 };
 
 playPauseBtn.addEventListener("click", () => {
@@ -270,15 +274,17 @@ const highlightSong = (index) => {
   const rowsHighlight = document.querySelectorAll(".song-table tr");
   const inverseHighlight = document.querySelectorAll(".song-table tr td");
 
-  rowsHighlight.forEach((row, idx) => {
-    if (idx === index) {
+  rowsHighlight.forEach((row) => {
+    const id = row.getAttribute("data-id");
+    if (id - 1 === index) {
       row.classList.add("highlight");
     } else {
       row.classList.remove("highlight");
     }
   });
-  inverseHighlight.forEach((row, idx) => {
-    if (idx === index) {
+  inverseHighlight.forEach((row) => {
+    const id = row.getAttribute("data-id");
+    if (id - 1 === index) {
       row.classList.add("inverse-highlight");
     } else {
       row.classList.remove("inverse-highlight");
