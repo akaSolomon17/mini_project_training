@@ -12,13 +12,35 @@
  */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+const playlistContainer = document.querySelector("#playlist"),
+  infoWrapper = document.querySelector(".song-info"),
+  coverImage = document.querySelector(".bg-img"),
+  discImage = document.querySelector(".disc-img"),
+  idSong = document.querySelector(".num"),
+  songWrapper = document.querySelector(".song");
+
+const playPauseBtn = document.querySelector("#playpause"),
+  nextBtn = document.querySelector("#forward"),
+  prevBtn = document.querySelector("#backward"),
+  shuffleBtn = document.querySelector("#shuffle"),
+  repeatBtn = document.querySelector("#repeat");
+
+const progressBar = document.querySelector(".progress-bar"),
+  progressBarArea = document.querySelector(".bar-wrapper"),
+  currentTimeElement = document.querySelector(".current-time"),
+  durationElement = document.querySelector(".duration"),
+  volumeSlider = document.querySelector(".volume-slider"),
+  volumeIcon = document.querySelector(".volume");
+
 let playing = false,
   currentPlay = 0,
   shuffling = false,
   repeating = false,
   favorites = [],
   audio = new Audio(),
-  songsContainer = [];
+  unplayedSongs = [],
+  songsContainer = [],
+  isMuted = false;
 
 fetch("http://localhost:3000/songs")
   .then((response) => response.json())
@@ -31,16 +53,18 @@ fetch("http://localhost:3000/songs")
     fetchPlaylist(songsContainer);
     loadSong(currentPlay);
   })
+  .then(() => {
+    const playlistRows = document.querySelectorAll(".song-table tr");
+
+    playlistRows.forEach((row, index) => {
+      row.addEventListener("click", () => {
+        playSong(index);
+      });
+    });
+  })
   .catch((err) => {
     console.log("Lỗi: " + err);
   });
-
-const playlistContainer = document.querySelector("#playlist"),
-  infoWrapper = document.querySelector(".song-info"),
-  coverImage = document.querySelector(".bg-img"),
-  discImage = document.querySelector(".disc-img"),
-  idSong = document.querySelector(".num"),
-  songWrapper = document.querySelector(".song");
 
 function fetchPlaylist(songsContainer) {
   playlistContainer.innerHTML = "";
@@ -76,8 +100,6 @@ const formatTime = (time) => {
   return `${minutes}:${seconds}`;
 };
 
-// audio.src = ;
-
 const loadSong = (index) => {
   let songName = songsContainer[index].name;
   let artistName = songsContainer[index].artist.join(", ");
@@ -93,12 +115,6 @@ const loadSong = (index) => {
   audio.src = songsContainer[index].path;
 };
 
-const playPauseBtn = document.querySelector("#playpause"),
-  nextBtn = document.querySelector("#forward"),
-  prevBtn = document.querySelector("#backward"),
-  shuffleBtn = document.querySelector("#shuffle"),
-  repeatBtn = document.querySelector("#repeat");
-
 playPauseBtn.addEventListener("click", () => {
   if (playing) {
     playPauseBtn.classList.replace("fa-circle-pause", "fa-circle-play");
@@ -109,6 +125,7 @@ playPauseBtn.addEventListener("click", () => {
     playPauseBtn.classList.replace("fa-circle-play", "fa-circle-pause");
     playing = true;
     audio.play();
+    highlightSong(currentPlay);
     discImage.classList.remove("stop");
   }
 });
@@ -122,6 +139,7 @@ const nextSong = () => {
   if (shuffling) {
     shuffleSong();
     loadSong(currentPlay);
+    highlightSong(currentPlay);
     audio.play();
     return;
   }
@@ -131,8 +149,9 @@ const nextSong = () => {
     currentPlay = 0;
   }
   loadSong(currentPlay);
-
+  highlightSong(currentPlay);
   if (playing) {
+    highlightSong(currentPlay);
     audio.play();
   }
 };
@@ -146,6 +165,7 @@ const prevSong = () => {
   if (shuffling) {
     shuffleSong();
     loadSong(currentPlay);
+    highlightSong(currentPlay);
     audio.play();
     return;
   }
@@ -156,8 +176,10 @@ const prevSong = () => {
     currentPlay = songsContainer.length - 1;
   }
   loadSong(currentPlay);
+  highlightSong(currentPlay);
 
   if (playing) {
+    highlightSong(currentPlay);
     audio.play();
   }
 };
@@ -175,10 +197,15 @@ const shuffleButton = () => {
 
 shuffleBtn.addEventListener("click", shuffleButton);
 
+// SHUFFLE FUNCTION
 const shuffleSong = () => {
-  if (shuffling) {
-    currentPlay = Math.floor(Math.random() * songsContainer.length);
+  if (unplayedSongs.length === 0) {
+    unplayedSongs = [...Array(songsContainer.length).keys()];
   }
+  let randomIndex = Math.floor(Math.random() * unplayedSongs.length);
+
+  currentPlay = unplayedSongs[randomIndex];
+  unplayedSongs.splice(randomIndex, 1);
 };
 
 repeatBtn.addEventListener("click", () => {
@@ -189,6 +216,7 @@ repeatBtn.addEventListener("click", () => {
   shuffleBtn.classList.remove("active");
 });
 
+// Behavior when the song end
 audio.addEventListener("ended", () => {
   if (repeating) {
     loadSong(currentPlay);
@@ -197,7 +225,10 @@ audio.addEventListener("ended", () => {
     if (currentPlay === songsContainer.length - 1) {
       audio.pause();
       playPauseBtn.classList.replace("fa-circle-pause", "fa-circle-play");
+      shuffleBtn.classList.remove("active");
+      discImage.classList.add("stop");
       currentPlay = false;
+      shuffling = false;
     } else {
       nextSong();
       audio.play();
@@ -205,4 +236,58 @@ audio.addEventListener("ended", () => {
   }
 });
 
-const highlightSong = () => {};
+// Highlight song is playing in playlist
+const highlightSong = (index) => {
+  const rowsHighlight = document.querySelectorAll(".song-table tr");
+  const inverseHighlight = document.querySelectorAll(".song-table tr td");
+
+  rowsHighlight.forEach((row, idx) => {
+    if (idx === index) {
+      row.classList.add("highlight");
+    } else {
+      row.classList.remove("highlight");
+    }
+  });
+  inverseHighlight.forEach((row, idx) => {
+    if (idx === index) {
+      row.classList.add("inverse-highlight");
+    } else {
+      row.classList.remove("inverse-highlight");
+    }
+  });
+};
+
+// highlight the first song play
+const playSong = (index) => {
+  currentPlay = index;
+  loadSong(currentPlay);
+  audio.play();
+  playPauseBtn.classList.replace("fa-circle-play", "fa-circle-pause");
+  discImage.classList.remove("stop");
+  highlightSong(currentPlay);
+};
+
+// Make a progress for each song
+const progress = () => {
+  let { currentTime, duration } = audio;
+
+  isNaN(duration) ? (duration = 0) : duration;
+  isNaN(currentTime) ? (currentTime = 0) : currentTime;
+
+  currentTimeElement.innerHTML = formatTime(currentTime);
+  durationElement.innerHTML = formatTime(duration);
+
+  let progressPercentage = (currentTime / duration) * 100;
+  progressBar.style.width = `${progressPercentage}%`;
+};
+
+audio.addEventListener("timeupdate", progress);
+
+const setProgress = (e) => {
+  let width = progressBarArea.clientWidth;
+  let clickX = e.offsetX;
+  let duration = audio.duration;
+  audio.currentTime = (clickX / width) * duration;
+};
+
+progressBarArea.addEventListener("click", setProgress);
