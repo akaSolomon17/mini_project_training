@@ -41,7 +41,6 @@ let playing = false,
   unplayedSongs = [],
   songsContainer = [],
   isMuted = false;
-
 fetch("http://localhost:3000/songs")
   .then((response) => response.json())
   .then((data) => {
@@ -51,6 +50,7 @@ fetch("http://localhost:3000/songs")
   })
   .then(() => {
     fetchPlaylist(songsContainer);
+    updateFavorite();
     loadSong(currentPlay);
   })
   .then(() => {
@@ -66,10 +66,13 @@ fetch("http://localhost:3000/songs")
     console.log("Lỗi: " + err);
   });
 
-function fetchPlaylist(songsContainer) {
+const fetchPlaylist = (songsContainer) => {
   playlistContainer.innerHTML = "";
+  let songCount = 0;
   songsContainer.forEach((song) => {
-    const { id, name, path } = song;
+    const { id, name, path, ads_img } = song;
+
+    const isFavorites = favorites.includes(id);
     const tr = document.createElement("tr");
 
     tr.classList.add(`song${id}`);
@@ -77,12 +80,39 @@ function fetchPlaylist(songsContainer) {
         <td class="num fs-5 fw-medium">${id}</td>
         <td class="song-title fs-5 fw-medium">${name}</td>
         <td class="like justify-content-center">
-        <i class="fa-regular fa-heart"></i>
+          <i class="${isFavorites ? "fa-solid" : "fa-regular"} fa-heart ${
+      isFavorites ? "active" : ""
+    }"></i>
+    
         </td>
+
         <td class="length fs-5"></td>
     `;
     playlistContainer.appendChild(tr);
 
+    songCount++;
+
+    if (songCount % 3 === 0) {
+      const adTr = document.createElement("tr");
+      adTr.innerHTML = `
+        <td colspan="4" class="ads-td">
+          <img src="${ads_img}" alt="Ads image" class="ads-img">  
+        </td>
+      `;
+      playlistContainer.appendChild(adTr);
+    }
+
+    tr.querySelector(".like").addEventListener("click", (e) => {
+      if (e.target.classList.contains("fa-heart")) {
+        addToFavorite(id, e);
+        e.target.classList.toggle("active");
+        e.target.classList.toggle("fa-solid");
+        return;
+      }
+    });
+    tr.addEventListener("click", () => {
+      console.log(favorites);
+    });
     const audioForDuration = new Audio(`${path}`);
     audioForDuration.addEventListener("loadedmetadata", () => {
       const duration = audioForDuration.duration;
@@ -90,7 +120,7 @@ function fetchPlaylist(songsContainer) {
       tr.querySelector(".length").innerText = songDuration;
     });
   });
-}
+};
 
 const formatTime = (time) => {
   let minutes = Math.floor(time / 60);
@@ -103,16 +133,15 @@ const formatTime = (time) => {
 const loadSong = (index) => {
   let songName = songsContainer[index].name;
   let artistName = songsContainer[index].artist.join(", ");
+  coverImage.src = songsContainer[index].img;
+  discImage.src = songsContainer[index].img;
+  audio.src = songsContainer[index].path;
 
   infoWrapper.innerHTML = `
   <div class="current-song fs-1 mb-2  fw-bolder">${songName}</div>
   <div class="song-details d-flex align-items-center mb-4">
     <div class=" fs-5 fw-medium">${artistName}</div>
   </div>`;
-
-  coverImage.src = songsContainer[index].img;
-  discImage.src = songsContainer[index].img;
-  audio.src = songsContainer[index].path;
 };
 
 playPauseBtn.addEventListener("click", () => {
@@ -150,6 +179,7 @@ const nextSong = () => {
   }
   loadSong(currentPlay);
   highlightSong(currentPlay);
+
   if (playing) {
     highlightSong(currentPlay);
     audio.play();
@@ -197,7 +227,6 @@ const shuffleButton = () => {
 
 shuffleBtn.addEventListener("click", shuffleButton);
 
-// SHUFFLE FUNCTION
 const shuffleSong = () => {
   if (unplayedSongs.length === 0) {
     unplayedSongs = [...Array(songsContainer.length).keys()];
@@ -206,6 +235,8 @@ const shuffleSong = () => {
 
   currentPlay = unplayedSongs[randomIndex];
   unplayedSongs.splice(randomIndex, 1);
+
+  console.log(currentPlay);
 };
 
 repeatBtn.addEventListener("click", () => {
@@ -216,7 +247,6 @@ repeatBtn.addEventListener("click", () => {
   shuffleBtn.classList.remove("active");
 });
 
-// Behavior when the song end
 audio.addEventListener("ended", () => {
   if (repeating) {
     loadSong(currentPlay);
@@ -236,7 +266,6 @@ audio.addEventListener("ended", () => {
   }
 });
 
-// Highlight song is playing in playlist
 const highlightSong = (index) => {
   const rowsHighlight = document.querySelectorAll(".song-table tr");
   const inverseHighlight = document.querySelectorAll(".song-table tr td");
@@ -256,8 +285,6 @@ const highlightSong = (index) => {
     }
   });
 };
-
-// highlight the first song play
 const playSong = (index) => {
   currentPlay = index;
   loadSong(currentPlay);
@@ -267,7 +294,6 @@ const playSong = (index) => {
   highlightSong(currentPlay);
 };
 
-// Make a progress for each song
 const progress = () => {
   let { currentTime, duration } = audio;
 
@@ -288,6 +314,62 @@ const setProgress = (e) => {
   let clickX = e.offsetX;
   let duration = audio.duration;
   audio.currentTime = (clickX / width) * duration;
+
+  console.log(clickX, width, progressBarArea);
 };
 
 progressBarArea.addEventListener("click", setProgress);
+
+volumeSlider.addEventListener("input", () => {
+  const volumeValue = volumeSlider.value;
+  audio.volume = volumeValue / 100;
+});
+
+volumeIcon.addEventListener("click", () => {
+  isMuted = !isMuted;
+
+  if (isMuted) {
+    volumeIcon.classList.replace("fa-volume-high", "fa-volume-mute");
+    audio.volume = 0;
+    volumeSlider.value = 0;
+  } else {
+    volumeIcon.classList.replace("fa-volume-mute", "fa-volume-high");
+    volumeSlider.value = 100;
+    const volumeValue = volumeSlider.value / 100;
+    audio.volume = volumeValue;
+  }
+});
+
+const addToFavorite = (index, e) => {
+  e.stopPropagation();
+  if (favorites.includes(index)) {
+    favorites = favorites.filter((item) => item !== index);
+  } else {
+    favorites.push(index);
+  }
+
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+};
+
+const updateFavorite = () => {
+  window.addEventListener("load", () => {
+    const favoritesData = localStorage.getItem("favorites");
+    if (favoritesData) {
+      favorites = JSON.parse(favoritesData);
+    }
+
+    updateFavoriteIcons();
+  });
+};
+
+const updateFavoriteIcons = () => {
+  const likeIcons = document.querySelectorAll(".like i");
+  likeIcons.forEach((icon, index) => {
+    const isFavorites = favorites.includes(index + 1);
+    if (isFavorites) {
+      icon.classList.add("fa-solid", "active");
+    } else {
+      icon.classList.remove("fa-solid", "active");
+    }
+  });
+};
