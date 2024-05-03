@@ -59,7 +59,7 @@ fetch("http://localhost:3000/songs")
     playlistRows.forEach((row) => {
       row.addEventListener("click", () => {
         const id = row.dataset.id;
-        playSong(id - 1);
+        if (id) playSong(id - 1);
       });
     });
   })
@@ -70,6 +70,7 @@ fetch("http://localhost:3000/songs")
 const fetchPlaylist = (songsContainer) => {
   playlistContainer.innerHTML = "";
   let songCount = 0;
+
   songsContainer.forEach((song) => {
     const { id, name, path, ads_img } = song;
 
@@ -109,9 +110,6 @@ const fetchPlaylist = (songsContainer) => {
         e.target.classList.toggle("fa-solid");
         return;
       }
-    });
-    tr.addEventListener("click", () => {
-      console.log(favorites);
     });
     const audioForDuration = new Audio(`${path}`);
     audioForDuration.addEventListener("loadedmetadata", () => {
@@ -270,6 +268,7 @@ audio.addEventListener("ended", () => {
   }
 });
 
+// Highlight song playing in playlist
 const highlightSong = (index) => {
   const rowsHighlight = document.querySelectorAll(".song-table tr");
   const inverseHighlight = document.querySelectorAll(".song-table tr td");
@@ -291,6 +290,7 @@ const highlightSong = (index) => {
     }
   });
 };
+// Play song from the list
 const playSong = (index) => {
   currentPlay = index;
   loadSong(currentPlay);
@@ -300,6 +300,7 @@ const playSong = (index) => {
   highlightSong(currentPlay);
 };
 
+// Set progress for song due to time played
 const progress = () => {
   let { currentTime, duration } = audio;
 
@@ -312,9 +313,9 @@ const progress = () => {
   let progressPercentage = (currentTime / duration) * 100;
   progressBar.style.width = `${progressPercentage}%`;
 };
-
 audio.addEventListener("timeupdate", progress);
 
+// Handle click on progress bar to set progress
 const setProgress = (e) => {
   let width = progressBarArea.clientWidth;
   let clickX = e.offsetX;
@@ -323,14 +324,15 @@ const setProgress = (e) => {
 
   console.log(clickX, width, progressBarArea);
 };
-
 progressBarArea.addEventListener("click", setProgress);
 
+// Handle volume control
 volumeSlider.addEventListener("input", () => {
   const volumeValue = volumeSlider.value;
   audio.volume = volumeValue / 100;
 });
 
+// Make icon change when turn on/off volume
 volumeIcon.addEventListener("click", () => {
   isMuted = !isMuted;
 
@@ -346,6 +348,7 @@ volumeIcon.addEventListener("click", () => {
   }
 });
 
+// Push/Peek the index in favorite arrays
 const addToFavorite = (index, e) => {
   e.stopPropagation();
   if (favorites.includes(index)) {
@@ -357,6 +360,7 @@ const addToFavorite = (index, e) => {
   localStorage.setItem("favorites", JSON.stringify(favorites));
 };
 
+// Update the state of Favorite in localStorage
 const updateFavorite = () => {
   window.addEventListener("load", () => {
     const favoritesData = localStorage.getItem("favorites");
@@ -368,10 +372,11 @@ const updateFavorite = () => {
   });
 };
 
+// Update icon change to like or unlike
 const updateFavoriteIcons = () => {
   const likeIcons = document.querySelectorAll(".like i");
   likeIcons.forEach((icon, index) => {
-    const isFavorites = favorites.includes(index + 1);
+    const isFavorites = favorites.includes(String(index + 1));
     if (isFavorites) {
       icon.classList.add("fa-solid", "active");
     } else {
