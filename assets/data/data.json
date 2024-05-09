@@ -5,103 +5,110 @@
             "name": "Call You Mine",
             "artist": ["Jeff Bernat"],
             "path":"https://res.cloudinary.com/dooge27kv/video/upload/v1713502625/CallYouMine_kbdpiu.mp3",
-            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503026/CallYouMine_bj7sa9.jpg",
-            "ads_img":"https://res.cloudinary.com/dooge27kv/image/upload/c_fill,h_50,w_700,x_0,y_0/v1701586838/project/6SB-7138-87000072_fpnway.jpg"
+            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503026/CallYouMine_bj7sa9.jpg"
         },
         {
             "id": 2,
             "name": "Everybody Loves Somebody",
             "artist": ["Dean Martin"],
             "path":"https://res.cloudinary.com/dooge27kv/video/upload/v1713502629/EverybodyLovesSomebody_kgc5ot.mp3",
-            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503027/EverybodyLovesSomebody_xjd5x7.jpg",
-            "ads_img":"https://res.cloudinary.com/dooge27kv/image/upload/c_fill,h_50,w_700,x_0,y_0/v1701586838/project/6SB-7138-87000072_fpnway.jpg"
+            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503027/EverybodyLovesSomebody_xjd5x7.jpg"
         },
         {
             "id": 3,
             "name": "Everyday",
             "artist": ["SpaceSpeaker"],
             "path":"https://res.cloudinary.com/dooge27kv/video/upload/v1713502643/Everyday_zdiyyg.mp3",
-            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503026/Everyday_ezhe1r.jpg",
-            "ads_img":"https://res.cloudinary.com/dooge27kv/image/upload/c_fill,h_50,w_700,x_0,y_0/v1701586838/project/6SB-7138-87000072_fpnway.jpg"
+            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503026/Everyday_ezhe1r.jpg"
         },
         {
             "id": 4,
             "name": "EZ4ENCE",
             "artist": ["The Verkkars"],
             "path":"https://res.cloudinary.com/dooge27kv/video/upload/v1713502629/EZ4ENCE_mpeqra.mp3",
-            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503030/EZ4ENCE_rgyj9b.jpg",
-            "ads_img":"https://res.cloudinary.com/dooge27kv/image/upload/c_fill,h_50,w_700,x_0,y_0/v1701586838/project/6SB-7138-87000072_fpnway.jpg"
+            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503030/EZ4ENCE_rgyj9b.jpg"
         },
         {
             "id": 5,
             "name": "Forget About Her",
             "artist": ["Justatee","Touliver"],
             "path":"https://res.cloudinary.com/dooge27kv/video/upload/v1713502657/ForgetAboutHer_tldbt0.mp3",
-            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503028/ForgetAboutHer_sgi78i.jpg",
-            "ads_img":"https://res.cloudinary.com/dooge27kv/image/upload/c_fill,h_50,w_700,x_0,y_0/v1701586838/project/6SB-7138-87000072_fpnway.jpg"
+            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503028/ForgetAboutHer_sgi78i.jpg"
         },
         {
             "id": 6,
             "name": "Nắng Lên",
             "artist": ["Rhymastic","SOOBIN","GONZO","B-wine","MastaL"],
             "path":"https://res.cloudinary.com/dooge27kv/video/upload/v1713502658/NangLen_dmzcju.mp3",
-            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503027/NangLen_bbawtv.jpg",
-            "ads_img":"https://res.cloudinary.com/dooge27kv/image/upload/c_fill,h_50,w_700,x_0,y_0/v1701586838/project/6SB-7138-87000072_fpnway.jpg"
+            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503027/NangLen_bbawtv.jpg"
         },{
             "id": 7,
             "name": "The Real Slim Shady",
             "artist": ["Eminem"],
             "path":"https://res.cloudinary.com/dooge27kv/video/upload/v1713502689/TheRealSlimShady_ncdgft.mp3",
-            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503027/TheRealSlimShady_trbmxu.jpg",
-            "ads_img":"https://res.cloudinary.com/dooge27kv/image/upload/c_fill,h_50,w_700,x_0,y_0/v1701586838/project/6SB-7138-87000072_fpnway.jpg"
+            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503027/TheRealSlimShady_trbmxu.jpg"
         },
         {
             "id": 8,
             "name": "Time to rise",
             "artist": ["VANNDA"],
             "path":"https://res.cloudinary.com/dooge27kv/video/upload/v1713502651/TimeToRise_rjpxhz.mp3",
-            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503028/TimeToRise_ahiy71.jpg",
-            "ads_img":"https://res.cloudinary.com/dooge27kv/image/upload/c_fill,h_50,w_700,x_0,y_0/v1701586838/project/6SB-7138-87000072_fpnway.jpg"
+            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503028/TimeToRise_ahiy71.jpg"
         },
         {
             "id": 9,
             "name": "u mad!",
             "artist": ["bbno$"],
             "path":"https://res.cloudinary.com/dooge27kv/video/upload/v1713502629/UMad_kwnrgg.mp3",
-            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503029/UMad_iqxcbt.jpg",
-            "ads_img":"https://res.cloudinary.com/dooge27kv/image/upload/c_fill,h_50,w_700,x_0,y_0/v1701586838/project/6SB-7138-87000072_fpnway.jpg"
+            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1713503029/UMad_iqxcbt.jpg"
         },
         {
             "id": 10,
             "name": "Đứa nào làm em buồn",
             "artist": ["Phúc Du","Hoàng Dũng"],
             "path":"https://res.cloudinary.com/dooge27kv/video/upload/v1714631988/%C4%91%E1%BB%A9a_n%C3%A0o_l%C3%A0m_em_bu%E1%BB%93n.mp3",
-            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1714631986/duanaolamembuon.jpg",
-            "ads_img":"https://res.cloudinary.com/dooge27kv/image/upload/c_fill,h_50,w_700,x_0,y_0/v1701586838/project/6SB-7138-87000072_fpnway.jpg"
+            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1714631986/duanaolamembuon.jpg"
         },
         {
             "id": 11,
             "name": "Cắt kéo trên Lenin",
             "artist": ["Low G"],
             "path":"https://res.cloudinary.com/dooge27kv/video/upload/v1714631988/C%E1%BA%AFt_k%C3%A9o_tr%C3%AAn_L%C3%AAnin.mp3",
-            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1714631986/catkeotrenlenin.jpg",
-            "ads_img":"https://res.cloudinary.com/dooge27kv/image/upload/c_fill,h_50,w_700,x_0,y_0/v1701586838/project/6SB-7138-87000072_fpnway.jpg"
+            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1714631986/catkeotrenlenin.jpg"
         },
         {
             "id": 12,
             "name": "Giấc mơ",
             "artist": ["Tùng"],
             "path":"https://res.cloudinary.com/dooge27kv/video/upload/v1714632178/Giacmo.mp3",
-            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1714632177/GiacMo_zwwkzn.jpg",
-            "ads_img":"https://res.cloudinary.com/dooge27kv/image/upload/c_fill,h_50,w_700,x_0,y_0/v1701586838/project/6SB-7138-87000072_fpnway.jpg"
+            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1714632177/GiacMo_zwwkzn.jpg"
         },
         {
             "id": 13,
             "name": "Quá sớm",
             "artist": ["Low G"],
             "path":"https://res.cloudinary.com/dooge27kv/video/upload/v1714632178/Qu%C3%A1_S%E1%BB%9Bm.mp3",
-            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1714632177/QuaSom_hr8fqw.jpg",
-            "ads_img":"https://res.cloudinary.com/dooge27kv/image/upload/c_fill,h_50,w_700,x_0,y_0/v1701586838/project/6SB-7138-87000072_fpnway.jpg"
+            "img":"https://res.cloudinary.com/dooge27kv/image/upload/v1714632177/QuaSom_hr8fqw.jpg"
+        }
+    ],
+    "ads":[
+        {
+            "id": 1,
+            "name": "Ads 1",
+            "img": "https://phimhdmoi.net/med/sieuthimmo0324.gif",
+            "link": "/link-ads-1"
+        },
+        {
+            "id": 2,
+            "name": "Ads 2",
+            "img": "https://ax.mpapis.xyz/motchill/uploads/4637733674bb6ee353ed74b96f0c18d8.jpg",
+            "link": "/link-ads-2"
+        },
+        {
+            "id": 3,
+            "name": "Ads 3",
+            "img": "https://ads.cdn2-img.net/vip79-prload-pc-600x400new.gif",
+            "link": "/link-ads-3"
         }
     ]
 }

@@ -4,24 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport"
       content="width=device-width, initial-scale=1.0" />
+    <!-- BOOTSTRAP CDN  -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous" />
+    <!-- FONT AWESOME CDN -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
       rel="stylesheet" />
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
 
+    <!-- THÊM COMMENT CHIA CODE BLOCK / CHIA FILE -->
     <title>Wind Player</title>
     <link rel="icon" href="./assets/images/logo.png" type="image/x-icon">
   </head>
   <body>
+
     <div class="background">
       <img class="bg-img" src="./assets/images/song1.jpg" />
     </div>
-    <div class="container mt-5">
+    <!-- ADS CONTAINER -->
+    <div class="ads-wrapper" id="ads">
+      <img src alt class="ads-popup">
+    </div>
+    <!-- MUSIC PLAYER CONTAINER -->
+    <div class="container mt-5 align-content-center">
+      <!-- HEADER -->
       <div class="row mt-5 pb-5 header">
         <div class=" ps-1 col-10 ps-5 d-flex align-items-center fw-bolder">
           <img
@@ -36,74 +47,79 @@
           <i class="fav-list-icon fa-solid fa-bars"></i>
         </div>
         <div class="col-1 d-flex justify-content-start">
-          <img class="img-fluid"
+          <img class="img-fluid" 11111111111111111111111
             src="https://res.cloudinary.com/dooge27kv/image/upload/v1701672147/user_ccpmhz.png"
             alt="user_ava" style="cursor: pointer;">
         </div>
-      </div>
-      <div class="row pt-3 pb-4">
-        <div
-          class="disc-container col-6 d-flex flex-column justify-content-center">
+        <!-- PLAYER WRAPPER -->
+        <div class="row pt-3 pb-4">
+          <!-- CONTROLERS -->
           <div
-            class="d-flex justify-content-center">
-            <img
-              src="./assets/images/song1.jpg"
-              class="disc-img img-fluid rounded stop" />
-          </div>
-          <div
-            class="control d-flex align-items-center justify-content-center mt-5">
-            <i class="fa-solid fa-shuffle mx-3" id="shuffle"></i>
-            <i class=" fa-solid fa-backward mx-3" id="backward"></i>
-            <i class=" fa-regular fa-circle-play fa-2xl mx-3"
-              id="playpause"></i>
-            <i class=" fa-solid fa-forward mx-3" id="forward"></i>
-            <i class=" fa-solid fa-repeat mx-3" id="repeat"></i>
-          </div>
-        </div>
-        <div class="col-6 ms-5 d-flex flex-column">
-          <div class="song-info">
-            <div class="current-song fs-1 mb-2  fw-bolder">Song name</div>
-            <div class="song-details d-flex align-items-center mb-4">
-              <div class=" fs-5 fw-medium">Artist</div>
+            class="disc-container col-6 d-flex flex-column justify-content-center">
+            <div
+              class="d-flex justify-content-center">
+              <img
+                src="./assets/images/song1.jpg"
+                class="disc-img img-fluid rounded stop" />
+            </div>
+            <div
+              class="control d-flex align-items-center justify-content-center mt-5">
+              <i class="fa-solid fa-shuffle mx-3" id="shuffle"></i>
+              <i class=" fa-solid fa-backward mx-3" id="backward"></i>
+              <i class=" fa-regular fa-circle-play fa-2xl mx-3"
+                id="playpause"></i>
+              <i class=" fa-solid fa-forward mx-3" id="forward"></i>
+              <i class=" fa-solid fa-repeat mx-3" id="repeat"></i>
             </div>
           </div>
-          <div class="table-wrapper d-flex flex-column">
-            <table
-              class="song-table table-borderless hover-active "
-              id="playlist">
-              <tr class="song">
-                <td class="num fs-5 fw-medium">1</td>
-                <td class="song-title fs-5 fw-medium">Let's See What The Night
-                  Can Do</td>
-                <td class="like justify-content-center">
-                  <i class="fa-solid fa-heart"></i>
-                </td>
-                <td class="length fs-5">04:25</td>
-              </tr>
-            </table>
+          <!-- SONG INFO -->
+          <div class="col-6 ms-5 d-flex flex-column">
+            <!-- SONG PLAYING INFO -->
+            <div class="song-info">
+              <div class="current-song fs-1 mb-2  fw-bolder">Song name</div>
+              <div class="song-details d-flex align-items-center mb-4">
+                <div class=" fs-5 fw-medium">Artist</div>
+              </div>
+            </div>
+            <!-- PLAYLIST TABLE -->
+            <div class="table-wrapper d-flex flex-column">
+              <table
+                class="song-table table-borderless hover-active "
+                id="playlist">
+                <tr class="song">
+                  <td class="num fs-5 fw-medium">1</td>
+                  <td class="song-title fs-5 fw-medium">Let's See What The Night
+                    Can Do</td>
+                  <td class="like justify-content-center">
+                    <i class="fa-solid fa-heart"></i>
+                  </td>
+                  <td class="length fs-5">04:25</td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="mt-5 d-flex align-items-center">
-        <div
-          class="bar-wrapper">
-          <div class="progress-bar"></div>
-
-        </div>
-        <div
-          class="time d-flex justify-content-between align-items-center position-absolute">
-          <div class="current-time fs-6">00:00</div>
-          <div class="duration fs-6">00:00</div>
-        </div>
-        <div class="volume-wrapper">
-          <i class="volume fa-solid fa-volume-high"></i>
-          <div class="slider">
-            <input type="range" min="0" max="100" step="0.01" value="50"
-              class="volume-slider" orient="vertical">
+        <!-- PROGRESS BAR -->
+        <div class="mt-5 d-flex align-items-center">
+          <div
+            class="bar-wrapper">
+            <div class="progress-bar"></div>
 
           </div>
+          <div
+            class="time d-flex justify-content-between align-items-center position-absolute">
+            <div class="current-time fs-6">00:00</div>
+            <div class="duration fs-6">00:00</div>
+          </div>
+          <div class="volume-wrapper">
+            <i class="volume fa-solid fa-volume-high"></i>
+            <div class="slider">
+              <input type="range" min="0" max="100" step="0.01" value="50"
+                class="volume-slider" orient="vertical">
+            </div>
+          </div>
         </div>
-      </div>
-      <script src="main.js"></script>
-    </body>
-  </html>
+        <audio id="audio"></audio>
+        <script src="main.js"></script>
+      </body>
+    </html>

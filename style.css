@@ -3,6 +3,12 @@ html {
   box-sizing: border-box;
 }
 
+:root {
+  --blue: #0a5b81;
+  --white: #ffffff;
+  --background: rgba(255, 255, 255, 0.05);
+}
+
 body {
   margin: 0;
   font-family: "Ubuntu", sans-serif;
@@ -36,8 +42,6 @@ body {
 
 .container {
   border-radius: 15px;
-  justify-content: center;
-  align-items: center;
   height: 800px;
   min-height: 50%;
   min-width: 80%;
@@ -129,25 +133,7 @@ body {
   border-radius: inherit;
   background: linear-gradient(90deg, #8b8b8b80, #000000b6);
 }
-/* .progress-bar::before {
-  content: "";
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background-color: #000 !important;
-  border-radius: 50%;
-  top: 1px;
-  right: -5px;
-  transform: translateY(-50%);
-  background: #fff;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 1;
-} */
 
-/* .progress-bar:hover .progress-bar::before{
-  opacity: 1;
-} */
 .volume-wrapper {
   position: relative;
   cursor: pointer;
@@ -183,13 +169,6 @@ body {
   background: #ff4500;
   cursor: pointer;
 }
-/* 
-input[type=range][orient=vertical] {
-  appearance: slider-vertical;
-  width: 8px;
-  height: 175px;
-  padding: 0 5px;
-} */
 
 .time {
   width: 71%;
@@ -211,46 +190,58 @@ i.fa-circle-pause {
 .song {
   border: 1px solid #afafaf09;
   border-radius: 15px !important;
-  color: white;
+  color: var(--white);
   background-color: #0000005d;
   position: relative;
   overflow: hidden;
 }
 
 .control i:hover {
-  color: #0a5b81;
+  color: var(--blue);
 }
 
 .active {
-  color: #0a5b81;
+  color: var(--blue);
 }
 
 .highlight {
   background-color: rgba(0, 0, 0, 0.699);
-  color: white;
+  color: var(--white);
 }
 
 .fa-regular.fa-heart:hover {
-  color: white;
+  color: var(--white);
 }
 
 .fa-regular.fa-heart.active {
-  color: white;
-}
-/* .banner-cell {
-  position: relative;
+  color: var(--white);
 }
 
-.banner-image {
+.ads-popup {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+}
+.ads-wrapper {
+  position: fixed;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-} */
+  background-color: #0000009c;
+  z-index: 998;
+}
 
-.ads-img {
-  max-width: 100%;
-  height: 50px;
-  width: 100%;
-  object-fit: cover;
-  user-select: none;
+.cls_ov {
+  color: white;
+  border: 1px solid white;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  right: 0;
+  font-size: 10px;
+  text-decoration: none;
 }
